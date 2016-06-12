@@ -6,7 +6,16 @@ var _ = require('underscore');
 var fs = require('fs');
 var crypto = require('crypto');
 var zlib = require('zlib');
-var memcpy = require('memcpy');
+//var memcpy = require('memcpy');
+
+function toArrayBuffer(buffer) {
+	var ab = new ArrayBuffer(buffer.length);
+	var view = new Uint8Array(ab);
+	for (var i = 0; i < buffer.length; ++i) {
+		view[i] = buffer[i];
+	}
+	return ab;
+}
 
 // ## Definitions
 
@@ -32,8 +41,9 @@ var hands = ['Invalid', 'High Card', 'One Pair', 'Two Pairs',
 // Loads the look-up table.
 var buffer = fs.readFileSync(__dirname + '/HandRanks.dat.gz');
 var zbuffer = zlib.gunzipSync(buffer);
-var bufferArray = new ArrayBuffer(zbuffer.length);
-memcpy(bufferArray,0,zbuffer);
+//var bufferArray = new ArrayBuffer(zbuffer.length);
+//memcpy(bufferArray,0,zbuffer);
+var bufferArray = toArrayBuffer(zbuffer);
 var evaluator = new Int32Array(bufferArray);
 
 // ## Internal Functions
