@@ -5,7 +5,7 @@ It uses the look-up table method created by users of the
 
 ## Installing
 ```
-npm install texas
+npm install texas-without-memcpy
 ```
 
 ## Using
@@ -15,7 +15,7 @@ npm install texas
 The following example generates a random hand and evaluates it:
 ```javascript
 var _ = require('underscore');
-var texas = require('texas');
+var texas = require('texas-without-memcpy');
 
 var hand = _.first(texas.deck(), 7);
 console.log(_.map(hand, texas.abbr));
